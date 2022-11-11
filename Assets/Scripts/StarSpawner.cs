@@ -18,7 +18,7 @@ public class StarSpawner : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ball"))
         {
-            //Add event launch TODO
+            GlobalEventManager.StarCollected();
             Destroy(gameObject);
         }
     }

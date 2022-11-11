@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class OnGameStart : MonoBehaviour
 {
-    private bool isGameStartedOnce;
     [Range(10, 100)]
     public int ChanceOfStarSpawning;
+
+    private bool isGameStartedOnce;
 
     private void Awake()
     {
