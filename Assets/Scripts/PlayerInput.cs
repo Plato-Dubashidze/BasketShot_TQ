@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
@@ -13,6 +14,7 @@ public class PlayerInput : MonoBehaviour
     public Transform dotsTransform;
 
     private GameObject curNet, curBasket;
+    private Transform lastDotTransform;
     private Vector3 startMousePos;
 
     private List<GameObject> dotsObjects = new List<GameObject>();
@@ -93,6 +95,7 @@ public class PlayerInput : MonoBehaviour
             point.z = -1.0f;
             dotsObjects[i].transform.position = point;
         }
+        lastDotTransform = dotsObjects.Last().transform;
     }
 
     private Vector2 PathPoint(Vector2 startP, Vector2 startVel, float t)
@@ -111,8 +114,11 @@ public class PlayerInput : MonoBehaviour
 
     private void BasketRotation(GameObject basket)
     {
-        Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(basket.transform.position);
-        float angle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) - 270f;
-        basket.transform.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        Vector3 dir = lastDotTransform.position - basket.transform.position;
+        dir.Normalize();
+
+        float rot_z = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        basket.transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90f);
+
     }
 }
