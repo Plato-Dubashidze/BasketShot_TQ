@@ -7,9 +7,13 @@ using UnityEngine.Events;
 public class BallController : MonoBehaviour
 {
     private Transform netTransform;
+    private Rigidbody2D rb;
+    private Collider2D col;
 
     private void Start()
     {
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        col = gameObject.GetComponent<Collider2D>();
         GlobalEventManager.shoot.AddListener(Shoot);
     }
 
@@ -23,24 +27,32 @@ public class BallController : MonoBehaviour
 
     private void Shoot(Vector3 force)
     {
-        gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
-        gameObject.GetComponent<Collider2D>().enabled = true;
+        rb.isKinematic = false;
+        col.enabled = true;
         BallStatus.isInNet = false;
-        transform.GetComponent<Rigidbody2D>().AddForce(force);
-        print(force);
+        rb.AddForce(force);
+        rb.AddTorque(5f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Net"))
         {
-            gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
-            gameObject.GetComponent<Collider2D>().enabled = false;
-            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            rb.isKinematic = true;
+            col.enabled = false;
+            rb.velocity = new Vector3(0, 0, 0);
+            rb.angularVelocity = 0;
             BallStatus.isInNet = true;
             BallStatus.isShot = false;
             netTransform = collision.transform;
             GlobalEventManager.NewNetAssigned(collision.gameObject);
+            CameraStatus.camIsMoving = true;
+            GlobalEventManager.SpawnBasket();
+        }
+
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            GlobalEventManager.LevelEnd();
         }
     }
 }

@@ -119,6 +119,11 @@ public class PlayerInput : MonoBehaviour
 
         float rot_z = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         basket.transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90f);
+        transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90f);
+    }
+
+    private void netScaler(GameObject net)
+    {
 
     }
 }

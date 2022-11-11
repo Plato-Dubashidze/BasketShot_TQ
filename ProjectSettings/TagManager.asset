@@ -8,6 +8,10 @@ TagManager:
   - Net
   - Ball
   - Rim
+  - Wall
+  - Floor
+  - Basket
+  - Other
   layers:
   - Default
   - TransparentFX
