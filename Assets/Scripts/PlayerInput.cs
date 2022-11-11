@@ -58,8 +58,8 @@ public class PlayerInput : MonoBehaviour
                     BallStatus.aiming = true;
                     startMousePos = Input.mousePosition;
                     CalculatePath();
-                    BasketRotation(curBasket);
                     ShowPath();
+                    BasketRotation(curBasket);
                 }
                 else
                 {
@@ -124,6 +124,6 @@ public class PlayerInput : MonoBehaviour
 
     private void netScaler(GameObject net)
     {
-
+        //TO DO, SLINGSHOT EFFECT
     }
 }

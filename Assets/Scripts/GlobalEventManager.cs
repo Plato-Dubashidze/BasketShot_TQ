@@ -6,8 +6,6 @@ public class GlobalEventManager
     public static UnityEvent starCollected = new UnityEvent();
     public static UnityEvent levelEnd = new UnityEvent();
     public static UnityEvent spawnBasket = new UnityEvent();
-    public static UnityEvent <GameObject> addBasketToList = new UnityEvent<GameObject>();
-    public static UnityEvent<GameObject> removeBasketFromList = new UnityEvent<GameObject>();
     public static UnityEvent<GameObject> newNetAssigned = new UnityEvent<GameObject>();
     public static UnityEvent<Vector3> shoot = new UnityEvent<Vector3>();
 
@@ -34,15 +32,5 @@ public class GlobalEventManager
     public static void SpawnBasket()
     {
         spawnBasket.Invoke();
-    }
-
-    public static void AddBasketToList(GameObject basket)
-    {
-        addBasketToList.Invoke(basket);
-    }
-
-    public static void RemoveBasketFromList(GameObject basket)
-    {
-        removeBasketFromList.Invoke(basket);
     }
 }
