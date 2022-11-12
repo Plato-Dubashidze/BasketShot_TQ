@@ -6,6 +6,8 @@ using UnityEngine;
 public class NetBehaviour : MonoBehaviour
 {
     public GameObject netCol;
+
+    [SerializeField]private bool isReached;
     private void Start()
     {
         GlobalEventManager.shoot.AddListener(Shoot);
@@ -29,6 +31,11 @@ public class NetBehaviour : MonoBehaviour
         {
             gameObject.GetComponent<Collider2D>().enabled = false;
             netCol.GetComponent<Collider2D>().enabled = false;
+            if (!isReached)
+            {
+                GlobalEventManager.NetReached();
+                isReached = true;
+            }
         }
     }
 }

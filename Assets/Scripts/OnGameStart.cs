@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class OnGameStart : MonoBehaviour
 {
     [Range(10, 100)]
     public int ChanceOfStarSpawning;
+
+    public GameObject onGameStartCanvas;
 
     private bool isGameStartedOnce;
 
@@ -20,5 +23,12 @@ public class OnGameStart : MonoBehaviour
             PlayerPrefs.SetInt("SoundBool", true ? 1 : 0);
             PlayerPrefs.SetInt("IsStartedOnce", true ? 1 : 0);
         }
+
+        GlobalEventManager.gameFirstStart.AddListener(FirstGameStart);
+    }
+
+    private void FirstGameStart()
+    {
+        onGameStartCanvas.SetActive(false);
     }
 }

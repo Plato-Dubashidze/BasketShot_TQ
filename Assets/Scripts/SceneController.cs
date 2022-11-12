@@ -6,13 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    public GameObject endLevelCanvas, scoreCanvas;
     private void Awake()
     {
+        GlobalEventManager.gameFirstStart.AddListener(FirstGameStart);
         GlobalEventManager.levelEnd.AddListener(LevelEnd);
+    }
+
+
+    private void Start()
+    {
+        endLevelCanvas.SetActive(false);
     }
 
     private void LevelEnd()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        endLevelCanvas.SetActive(true);
+    }
+    private void FirstGameStart()
+    {
+        scoreCanvas.SetActive(true);
     }
 }

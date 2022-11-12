@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class PlayerInput : MonoBehaviour
     private Vector3 startMousePos;
 
     private List<GameObject> dotsObjects = new List<GameObject>();
+
+    private bool isLaunchedOnce;
 
     private void Start()
     {
@@ -51,8 +54,13 @@ public class PlayerInput : MonoBehaviour
     {
         if (!BallStatus.isShot)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
             {
+                if (!isLaunchedOnce)
+                {
+                    GlobalEventManager.GameFirstStart();
+                    isLaunchedOnce = true;
+                }
                 if (!BallStatus.aiming)
                 {
                     BallStatus.aiming = true;
@@ -70,6 +78,7 @@ public class PlayerInput : MonoBehaviour
             else if (BallStatus.aiming)
             {
                 GlobalEventManager.Shoot(GetForce(Input.mousePosition));
+                GlobalEventManager.GameFirstStart();
                 BallStatus.isShot = true;
                 BallStatus.aiming = false;
                 HidePath();

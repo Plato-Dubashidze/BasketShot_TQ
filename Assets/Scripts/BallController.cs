@@ -53,6 +53,7 @@ public class BallController : MonoBehaviour
         if (collision.gameObject.CompareTag("Floor"))
         {
             GlobalEventManager.LevelEnd();
+            Destroy(gameObject);
         }
     }
 }

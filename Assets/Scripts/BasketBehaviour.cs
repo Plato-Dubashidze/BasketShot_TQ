@@ -7,7 +7,13 @@ public class BasketBehaviour : MonoBehaviour
 {
     private void Start()
     {
+        GlobalEventManager.levelEnd.AddListener(LevelEnd);
         BasketsSpawner.basketsSpawned++;
+    }
+
+    private void LevelEnd()
+    {
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
