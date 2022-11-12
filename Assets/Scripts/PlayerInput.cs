@@ -9,7 +9,7 @@ public class PlayerInput : MonoBehaviour
 {
     public float power;
 
-    [Header ("Dots")]
+    [Header("Dots")]
     public int dotsVault;
     public GameObject dotPrefab;
     public Transform dotsTransform;
@@ -52,7 +52,7 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        if (!BallStatus.isShot)
+        if (!BallStatus.isShot && Time.timeScale != 0)
         {
             if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
             {

@@ -25,6 +25,8 @@ public class OnGameStart : MonoBehaviour
         }
 
         GlobalEventManager.gameFirstStart.AddListener(FirstGameStart);
+
+        onGameStartCanvas.SetActive(true);
     }
 
     private void FirstGameStart()

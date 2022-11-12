@@ -64,11 +64,13 @@ public class BallController : MonoBehaviour
         if (collision.gameObject.CompareTag("Rim"))
         {
             isOnRim = true;
+            GlobalEventManager.RimTouch();
         }
 
         if (collision.gameObject.CompareTag("MainCamera"))
         {
             isOnWall = true;
+            GlobalEventManager.Bounce();
         }
 
         if (isOnWall && isOnRim)
