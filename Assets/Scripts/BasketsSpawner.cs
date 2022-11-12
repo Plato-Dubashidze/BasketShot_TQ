@@ -21,8 +21,8 @@ public class BasketsSpawner : MonoBehaviour
     private void Start()
     {
         GlobalEventManager.spawnBasket.AddListener(SpawnBasket);
-        lastBasketOdd = new Vector3(-1.5f, 4f, 0f);
-        lastBasketEven = new Vector3(1.5f, 0f, 0f);
+        lastBasketOdd = new Vector3(-1.2f, 4f, 0f);
+        lastBasketEven = new Vector3(1.2f, 0f, 0f);
     }
 
     private void SpawnBasket()
@@ -49,13 +49,13 @@ public class BasketsSpawner : MonoBehaviour
     {
         float x;
         if(lastPos.x < 0)
-            x = lastPos.x + UnityEngine.Random.Range(0f, 0.3f);
+            x = lastPos.x + UnityEngine.Random.Range(0f, 0.2f);
         else if(lastPos.x > 0)
-            x = lastPos.x - UnityEngine.Random.Range(0f, 0.3f);
+            x = lastPos.x - UnityEngine.Random.Range(0f, 0.2f);
         else
             x = lastPos.x;
             
-        float y = lastPos.y + UnityEngine.Random.Range(5f, 8f);
+        float y = lastPos.y + UnityEngine.Random.Range(6f, 7.5f);
         float z = lastPos.z;
         return new Vector3 (x, y, z);
     }

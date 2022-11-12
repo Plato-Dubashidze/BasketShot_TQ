@@ -10,6 +10,8 @@ public class BallController : MonoBehaviour
     private Rigidbody2D rb;
     private Collider2D col;
 
+    private bool isOnRim, isOnWall;
+
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -31,7 +33,7 @@ public class BallController : MonoBehaviour
         col.enabled = true;
         BallStatus.isInNet = false;
         rb.AddForce(force);
-        rb.AddTorque(5f);
+        rb.AddTorque(10f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -54,6 +56,38 @@ public class BallController : MonoBehaviour
         {
             GlobalEventManager.LevelEnd();
             Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Rim"))
+        {
+            isOnRim = true;
+        }
+
+        if (collision.gameObject.CompareTag("MainCamera"))
+        {
+            isOnWall = true;
+        }
+
+        if (isOnWall && isOnRim)
+        {
+            GlobalEventManager.LevelEnd();
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Rim"))
+        {
+            isOnRim = false;
+        }
+
+        if (collision.gameObject.CompareTag("MainCamera"))
+        {
+            isOnWall = false;
         }
     }
 }
