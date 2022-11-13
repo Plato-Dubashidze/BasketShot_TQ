@@ -9,7 +9,6 @@ public class ScoreController : MonoBehaviour
     public Text curScoreText, bestScoreText, starsScore;
 
     private int curScore, bestScore, stars;
-
     public int CurScore
     {
         get { return curScore; }

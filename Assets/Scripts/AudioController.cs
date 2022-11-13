@@ -8,11 +8,48 @@ public class AudioController : MonoBehaviour
 {
     public AudioClip rim, bounce, net, shoot, star;
 
-    private AudioSource audioSource;
+    private AudioSource audioSourceRim, audioSourceStar, audioSourceShoot, audioSourceNet, audioSourceBounce;
 
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+
+        AddListeners();
+        SetupSources();
+
+    }
+
+    private void Rim()
+    {
+
+        audioSourceRim.Play();
+    }
+
+    private void Bounce()
+    {
+
+        audioSourceBounce.Play();
+    }
+
+    private void Net()
+    {
+
+        audioSourceNet.Play();
+    }
+
+    private void Shoot(Vector3 arg0)
+    {
+
+        audioSourceShoot.Play();
+    }
+
+    private void Star()
+    {
+
+        audioSourceStar.Play();
+    }
+
+    private void AddListeners()
+    {
         GlobalEventManager.starCollected.AddListener(Star);
         GlobalEventManager.shoot.AddListener(Shoot);
         GlobalEventManager.netReached.AddListener(Net);
@@ -20,38 +57,31 @@ public class AudioController : MonoBehaviour
         GlobalEventManager.rimTouch.AddListener(Rim);
     }
 
-    private void Rim()
+    private void SetupSources()
     {
-        audioSource.clip = rim;
-        audioSource.volume = 0.3f;
-        audioSource.Play();
-    }
+        audioSourceRim = gameObject.AddComponent<AudioSource>();
+        audioSourceRim.playOnAwake = false;
+        audioSourceRim.clip = rim;
+        audioSourceRim.volume = 0.3f;
 
-    private void Bounce()
-    {
-        audioSource.clip = bounce;
-        audioSource.volume = 1f;
-        audioSource.Play();
-    }
+        audioSourceNet = gameObject.AddComponent<AudioSource>();
+        audioSourceNet.playOnAwake = false;
+        audioSourceNet.clip = net;
+        audioSourceNet.volume = 0.8f;
 
-    private void Net()
-    {
-        audioSource.clip = net;
-        audioSource.volume = 0.8f;
-        audioSource.Play();
-    }
+        audioSourceShoot = gameObject.AddComponent<AudioSource>();
+        audioSourceShoot.playOnAwake = false;
+        audioSourceShoot.clip = shoot;
+        audioSourceShoot.volume = 0.6f;
 
-    private void Shoot(Vector3 arg0)
-    {
-        audioSource.clip = shoot;
-        audioSource.volume = 0.6f;
-        audioSource.Play();
-    }
+        audioSourceBounce = gameObject.AddComponent<AudioSource>();
+        audioSourceBounce.playOnAwake = false;
+        audioSourceBounce.clip = bounce;
+        audioSourceBounce.volume = 1f;
 
-    private void Star()
-    {
-        audioSource.clip = star;
-        audioSource.volume = 1f;
-        audioSource.Play();
+        audioSourceStar = gameObject.AddComponent<AudioSource>();
+        audioSourceStar.playOnAwake = false;
+        audioSourceStar.clip = star;
+        audioSourceStar.volume = 1f;
     }
 }
