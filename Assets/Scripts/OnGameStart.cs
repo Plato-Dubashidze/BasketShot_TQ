@@ -14,12 +14,13 @@ public class OnGameStart : MonoBehaviour
 
     private void Awake()
     {
-        BasketsCount.basketsCount = 0;
         isGameStartedOnce = PlayerPrefs.GetInt("IsStartedOnce") != 0;
+        BasketsCount.basketsCount = 0;
         PlayerPrefs.SetInt("ChanceOfStarSpawning", ChanceOfStarSpawning);
         Application.targetFrameRate = 300;
         if (!isGameStartedOnce)
         {
+            PlayerPrefs.SetString("BackGroundMode", "White");
             PlayerPrefs.SetInt("SoundBool", true ? 1 : 0);
             PlayerPrefs.SetInt("IsStartedOnce", true ? 1 : 0);
         }
